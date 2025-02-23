@@ -1,0 +1,52 @@
+﻿@model BookCatalog.Controllers.HomeController.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="featured-books">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4">Добре дошли в Book Haven</h1>
+            <div class="text-center">
+                <a class="btn btn-primary" href="@Url.Action("Index", "Author")" style="background-color: #f4a261; border-color: #f4a261;">Разгледай авторите</a>
+                <a class="btn btn-primary" href="@Url.Action("Index", "Genre")" style="background-color: #f4a261; border-color: #f4a261;">Разгледай жанровете</a>
+            </div>
+        <div class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Открийте невероятни книги</h1>
+            </div>
+        </div>
+
+    </div>
+    <h2 class="section-title">Kниги</h2>
+    <div class="book-list">
+        @foreach (var item in Model.Books)
+        {
+            <div class="book">
+                <img src="@item.ImagePath" alt="@item.Title">
+                <h3>@item.Title</h3>
+                <p>@item.Genre.Name</p>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.BookId">Details</a>
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.BookId">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="popular-authors">
+    <h2 class="section-title">Aвтори</h2>
+    <div class="author-list">
+        @foreach (var author in Model.Authors)
+        {
+            <div class="author">
+                <img src="@author.ImagePath" alt="@author.Name">
+                <h3>@author.Name</h3>
+                <a href="@Url.Action("Details", "Author", new { id = author.AuthorId })" class="btn btn-primary">
+                    Вижте
+                </a>
+            </div>
+        }
+    </div>
+</section>

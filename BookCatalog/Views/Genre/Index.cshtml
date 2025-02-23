@@ -1,0 +1,28 @@
+﻿@model List<BookCatalog.Models.Genre>
+
+@{
+    ViewData["Title"] = "Жанрове";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Жанрове</h1>
+        <div class="card-container">
+            @foreach (var genre in Model)
+            {
+                <div class="card">
+                    <img src="@Url.Content(genre.ImagePath)" alt="@genre.Name" asp-append-version="true">
+                    <h3>@genre.Name</h3>
+                    <p>@genre.Info</p>
+                    <a class="btn btn-primary" href="@Url.Action("Details", "Genre", new { id = genre.GenreId })">Разгледай</a>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

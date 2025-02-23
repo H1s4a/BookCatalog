@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BookCatalog.Models.Book>
+
+<h2>Резултати от търсенето</h2>
+
+@if (!Model.Any())
+{
+    <p>Няма намерени книги за вашето търсене.</p>
+}
+else
+{
+    <div class="book-list">
+        @foreach (var book in Model)
+        {
+            <div class="book">
+                <img src="@book.ImagePath" alt="@book.Title" />
+                <h3>@book.Title</h3>
+                <p>@(book.Author?.Name ?? "Не е указан автор")</p>
+                <p>@(book.Genre?.Name ?? "Не е указан жанр")</p>
+                <p>
+                    Тагове:
+                    @(book.BookTags?.Any() == true
+                        ? string.Join(", ", book.BookTags.Select(bt => bt.Tag.Name))
+                        : "Няма тагове")
+                </p>
+                <a href="@Url.Action("Details", "Home", new { id = book.BookId })" class="btn btn-info">Подробности</a>
+            </div>
+        }
+    </div>
+}
+
+<a href="/" class="btn btn-secondary">Обратно</a>

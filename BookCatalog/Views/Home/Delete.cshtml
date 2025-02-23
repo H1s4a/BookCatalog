@@ -1,0 +1,20 @@
+﻿@model BookCatalog.Models.Book
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container">
+    <h1>Изстриване</h1>
+    <h1>@Model.Title</h1>
+    <img src="@Model.ImagePath" alt="@Model.Title" class="book-image">
+    <p><strong>Автор:</strong> @Model.Author.Name</p>
+    <p><strong>Жанр:</strong> @Model.Genre.Name</p>
+    <h3>Сигурни ли сте?</h3>
+    <form method="post" asp-action="DeleteConfirmed" asp-route-id="@Model.BookId">
+        <input type="submit" class="btn btn-danger" value="Delete"/>
+        <a asp-action="Index" class="btn btn-secondary">Назад</a>
+    </form>
+    <!--<a href="Url.Action("Delete", "Home")" class="btn btn-danger">Изтрий</a>
+    <a href="Url.Action("Index", "Home")" class="btn btn-secondary">Назад</a>-->
+</div>

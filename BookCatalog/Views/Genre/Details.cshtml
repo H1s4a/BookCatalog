@@ -1,0 +1,30 @@
+﻿@model BookCatalog.Models.Genre
+
+<section class="genre-details">
+    <div class="container">
+        <h2 class="text-center">Жанр: @Model.Name</h2>
+        <p class="text-center">@Model.Info</p>
+
+        <h3>Книги от този жанр:</h3>
+        @if (Model.Books != null && Model.Books.Any())
+        {
+            <div class="book-list">
+                @foreach (var book in Model.Books)
+                {
+                    <div class="book-item">
+                        <img src="@book.ImagePath" alt="@book.Title">
+                        <h4>@book.Title</h4>
+                        <p>Автор: @book.Author.Name</p>
+                        <a href="@Url.Action("Details", "Home", new { id = book.BookId })" class="btn btn-info">Виж повече</a>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-muted">Няма книги в този жанр.</p>
+        }
+
+        <a href="@Url.Action("Index", "Genre")" class="btn btn-secondary">Обратно</a>
+    </div>
+</section>
